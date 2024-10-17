@@ -1,3 +1,37 @@
-[gd_scene format=3 uid="uid://ugb8orhcsbj4"]
+[gd_scene load_steps=4 format=3 uid="uid://ugb8orhcsbj4"]
+
+[ext_resource type="Script" path="res://Scripts/BasicXRSetup.gd" id="1_o00ps"]
+[ext_resource type="PackedScene" uid="uid://bns1wjdfq574m" path="res://Models/Quest2Controllers/oculus_quest2_controller_left.glb" id="2_iijpd"]
+
+[sub_resource type="Environment" id="Environment_jf78m"]
+background_mode = 1
+background_color = Color(0.039, 0.0450667, 0.13, 1)
+ambient_light_color = Color(0.1846, 0.198423, 0.26, 1)
 
 [node name="Root" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jf78m")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.000270128, 1.51778, -0.00272942)
+light_size = 0.236
+spot_angle = 35.0
+
+[node name="XRRig" type="XROrigin3D" parent="."]
+current = true
+script = ExtResource("1_o00ps")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XRRig"]
+
+[node name="LeftHand" type="XRController3D" parent="XRRig"]
+tracker = &"left_hand"
+
+[node name="oculus_quest2_controller_left" parent="XRRig/LeftHand" instance=ExtResource("2_iijpd")]
+transform = Transform3D(1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
+
+[node name="RightHand" type="XRController3D" parent="XRRig"]
+tracker = &"right_hand"
+
+[node name="oculus_quest2_controller_left2" parent="XRRig/RightHand" instance=ExtResource("2_iijpd")]
+transform = Transform3D(-1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
