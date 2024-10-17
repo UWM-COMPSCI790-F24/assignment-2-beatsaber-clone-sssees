@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2hfsk0u6hvqs"]
+
+[ext_resource type="Script" path="res://Scripts/BasicXRSetup.gd" id="1_2a6xm"]
+
+[node name="XRRig" type="XROrigin3D"]
+current = true
+script = ExtResource("1_2a6xm")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="LeftHand" type="XRController3D" parent="."]
+tracker = &"left_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LeftHand"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="RightHand" type="XRController3D" parent="."]
+tracker = &"right_hand"
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="RightHand"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="XRNode3D" type="XRNode3D" parent="."]
+visible = false
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+
+[node name="OpenXRFbHandTrackingMesh" type="OpenXRFbHandTrackingMesh" parent="XRNode3D"]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XRNode3D/OpenXRFbHandTrackingMesh"]
+
+[node name="XRNode3D2" type="XRNode3D" parent="."]
+visible = false
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+
+[node name="OpenXRFbHandTrackingMesh" type="OpenXRFbHandTrackingMesh" parent="XRNode3D2"]
+hand = 1
+bones/0/name = "RightPalm"
+bones/1/name = "RightHand"
+bones/2/name = "RightThumbMetacarpal"
+bones/3/name = "RightThumbProximal"
+bones/4/name = "RightThumbDistal"
+bones/5/name = "RightThumbTip"
+bones/6/name = "RightIndexMetacarpal"
+bones/7/name = "RightIndexProximal"
+bones/8/name = "RightIndexIntermediate"
+bones/9/name = "RightIndexDistal"
+bones/10/name = "RightIndexTip"
+bones/11/name = "RightMiddleMetacarpal"
+bones/12/name = "RightMiddleProximal"
+bones/13/name = "RightMiddleIntermediate"
+bones/14/name = "RightMiddleDistal"
+bones/15/name = "RightMiddleTip"
+bones/16/name = "RightRingMetacarpal"
+bones/17/name = "RightRingProximal"
+bones/18/name = "RightRingIntermediate"
+bones/19/name = "RightRingDistal"
+bones/20/name = "RightRingTip"
+bones/21/name = "RightLittleMetacarpal"
+bones/22/name = "RightLittleProximal"
+bones/23/name = "RightLittleIntermediate"
+bones/24/name = "RightLittleDistal"
+bones/25/name = "RightLittleTip"
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XRNode3D2/OpenXRFbHandTrackingMesh"]
+hand_tracker = &"/user/hand_tracker/right"

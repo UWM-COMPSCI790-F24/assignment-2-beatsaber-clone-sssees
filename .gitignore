@@ -1,5 +1,7 @@
-# Godot files
+# Godot 4+ specific ignores
 .godot/
-
-# Android
-android/
+/android/
+/addons/
+# Intentional ignores
+# Get the OpenXR plugin from the AssetLib if needed
+*.apk
