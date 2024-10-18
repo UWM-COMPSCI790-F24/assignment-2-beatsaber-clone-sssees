@@ -34,3 +34,5 @@ func _on_laser_entered_area(area: Area3D) -> void:
 	var box = possibleNode as NoteBox
 	#print("Note box hit! ", box)
 	box.DoGibs()
+	
+	
