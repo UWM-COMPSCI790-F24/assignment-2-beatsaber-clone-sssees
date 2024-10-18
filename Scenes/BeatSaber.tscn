@@ -20,6 +20,7 @@ script = ExtResource("1_a6c52")
 
 [node name="CubeSpawner" type="Node" parent="."]
 script = ExtResource("2_noahy")
+noteboxPrefab = ExtResource("7_a8m0e")
 
 [node name="_Environment" type="Node3D" parent="."]
 
@@ -27,7 +28,7 @@ script = ExtResource("2_noahy")
 environment = SubResource("Environment_jf78m")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="_Environment"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3, -0.003)
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 3, -0.003)
 light_size = 0.236
 spot_range = 10.0
 spot_angle = 35.0
@@ -55,6 +56,7 @@ script = ExtResource("2_cey28")
 transform = Transform3D(1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
 
 [node name="LaserPointer" parent="XRRig/LeftHand" instance=ExtResource("6_10xxv")]
+visible = false
 
 [node name="RightHand" type="XRController3D" parent="XRRig"]
 tracker = &"right_hand"
@@ -64,6 +66,4 @@ script = ExtResource("2_cey28")
 transform = Transform3D(-1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
 
 [node name="LaserPointer" parent="XRRig/RightHand" instance=ExtResource("6_10xxv")]
-
-[node name="NoteBox" parent="." instance=ExtResource("7_a8m0e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.259, -5)
+visible = false
