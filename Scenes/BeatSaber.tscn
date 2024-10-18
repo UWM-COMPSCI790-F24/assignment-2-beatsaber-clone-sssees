@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ugb8orhcsbj4"]
+[gd_scene load_steps=9 format=3 uid="uid://ugb8orhcsbj4"]
 
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_a6c52"]
 [ext_resource type="Script" path="res://Scripts/BasicXRSetup.gd" id="1_o00ps"]
+[ext_resource type="Script" path="res://Scripts/SaberController.gd" id="2_cey28"]
 [ext_resource type="PackedScene" uid="uid://bns1wjdfq574m" path="res://Models/Quest2Controllers/oculus_quest2_controller_left.glb" id="2_iijpd"]
+[ext_resource type="Script" path="res://Scripts/CubeSpawner.gd" id="2_noahy"]
+[ext_resource type="PackedScene" uid="uid://cepm4yfiedo0i" path="res://Prefabs/LaserPointer.tscn" id="6_10xxv"]
+[ext_resource type="PackedScene" uid="uid://c53f5cmu7wsfx" path="res://Prefabs/NoteBox.tscn" id="7_a8m0e"]
 
 [sub_resource type="Environment" id="Environment_jf78m"]
 background_mode = 1
@@ -10,13 +15,31 @@ ambient_light_color = Color(0.1846, 0.198423, 0.26, 1)
 
 [node name="Root" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_a6c52")
+
+[node name="CubeSpawner" type="Node" parent="."]
+script = ExtResource("2_noahy")
+
+[node name="_Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="_Environment"]
 environment = SubResource("Environment_jf78m")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.000270128, 1.51778, -0.00272942)
+[node name="SpotLight3D" type="SpotLight3D" parent="_Environment"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3, -0.003)
 light_size = 0.236
+spot_range = 10.0
 spot_angle = 35.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="_Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.025, 0)
+size = Vector3(0.2, 0.05, 0.2)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="_Environment/CSGBox3D"]
+transform = Transform3D(0.707107, -0.707107, 0, -3.09086e-08, -3.09086e-08, 1, -0.707107, -0.707107, -4.37114e-08, 0, 0.025, 0)
+polygon = PackedVector2Array(0, 0, 0, 1, 1.65889, 1.65959, 1, 0)
+depth = 0.05
 
 [node name="XRRig" type="XROrigin3D" parent="."]
 current = true
@@ -26,12 +49,21 @@ script = ExtResource("1_o00ps")
 
 [node name="LeftHand" type="XRController3D" parent="XRRig"]
 tracker = &"left_hand"
+script = ExtResource("2_cey28")
 
 [node name="oculus_quest2_controller_left" parent="XRRig/LeftHand" instance=ExtResource("2_iijpd")]
 transform = Transform3D(1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
 
+[node name="LaserPointer" parent="XRRig/LeftHand" instance=ExtResource("6_10xxv")]
+
 [node name="RightHand" type="XRController3D" parent="XRRig"]
 tracker = &"right_hand"
+script = ExtResource("2_cey28")
 
 [node name="oculus_quest2_controller_left2" parent="XRRig/RightHand" instance=ExtResource("2_iijpd")]
 transform = Transform3D(-1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
+
+[node name="LaserPointer" parent="XRRig/RightHand" instance=ExtResource("6_10xxv")]
+
+[node name="NoteBox" parent="." instance=ExtResource("7_a8m0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.259, -5)

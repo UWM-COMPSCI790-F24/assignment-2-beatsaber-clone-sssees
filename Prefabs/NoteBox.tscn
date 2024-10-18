@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c53f5cmu7wsfx"]
+
+[ext_resource type="Script" path="res://Scripts/NoteBox.gd" id="1_p818f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bqdq0"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="NoteBox" type="Node3D"]
+script = ExtResource("1_p818f")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_bqdq0")
