@@ -1,67 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2hfsk0u6hvqs"]
+[gd_scene load_steps=5 format=3 uid="uid://b2hfsk0u6hvqs"]
 
-[ext_resource type="Script" path="res://Scripts/BasicXRSetup.gd" id="1_2a6xm"]
+[ext_resource type="Script" path="res://Scripts/BasicXRSetup.gd" id="1_81xb0"]
+[ext_resource type="Script" path="res://Scripts/SaberController.gd" id="2_xuogr"]
+[ext_resource type="PackedScene" uid="uid://bns1wjdfq574m" path="res://Models/Quest2Controllers/oculus_quest2_controller_left.glb" id="3_fdm6m"]
+[ext_resource type="PackedScene" uid="uid://cepm4yfiedo0i" path="res://Prefabs/LaserPointer.tscn" id="4_nl35o"]
 
 [node name="XRRig" type="XROrigin3D"]
 current = true
-script = ExtResource("1_2a6xm")
+script = ExtResource("1_81xb0")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
 
 [node name="LeftHand" type="XRController3D" parent="."]
 tracker = &"left_hand"
+script = ExtResource("2_xuogr")
+saberType = 2
 
-[node name="CSGBox3D" type="CSGBox3D" parent="LeftHand"]
-size = Vector3(0.1, 0.1, 0.1)
+[node name="oculus_quest2_controller_left" parent="LeftHand" instance=ExtResource("3_fdm6m")]
+transform = Transform3D(1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
+
+[node name="LaserPointer" parent="LeftHand" instance=ExtResource("4_nl35o")]
+visible = false
+color = Color(0, 0, 1, 1)
 
 [node name="RightHand" type="XRController3D" parent="."]
 tracker = &"right_hand"
+script = ExtResource("2_xuogr")
+saberType = 1
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="RightHand"]
-size = Vector3(0.1, 0.1, 0.1)
+[node name="oculus_quest2_controller_left2" parent="RightHand" instance=ExtResource("3_fdm6m")]
+transform = Transform3D(-1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
 
-[node name="XRNode3D" type="XRNode3D" parent="."]
+[node name="LaserPointer" parent="RightHand" instance=ExtResource("4_nl35o")]
 visible = false
-tracker = &"/user/hand_tracker/left"
-show_when_tracked = true
-
-[node name="OpenXRFbHandTrackingMesh" type="OpenXRFbHandTrackingMesh" parent="XRNode3D"]
-
-[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XRNode3D/OpenXRFbHandTrackingMesh"]
-
-[node name="XRNode3D2" type="XRNode3D" parent="."]
-visible = false
-tracker = &"/user/hand_tracker/right"
-show_when_tracked = true
-
-[node name="OpenXRFbHandTrackingMesh" type="OpenXRFbHandTrackingMesh" parent="XRNode3D2"]
-hand = 1
-bones/0/name = "RightPalm"
-bones/1/name = "RightHand"
-bones/2/name = "RightThumbMetacarpal"
-bones/3/name = "RightThumbProximal"
-bones/4/name = "RightThumbDistal"
-bones/5/name = "RightThumbTip"
-bones/6/name = "RightIndexMetacarpal"
-bones/7/name = "RightIndexProximal"
-bones/8/name = "RightIndexIntermediate"
-bones/9/name = "RightIndexDistal"
-bones/10/name = "RightIndexTip"
-bones/11/name = "RightMiddleMetacarpal"
-bones/12/name = "RightMiddleProximal"
-bones/13/name = "RightMiddleIntermediate"
-bones/14/name = "RightMiddleDistal"
-bones/15/name = "RightMiddleTip"
-bones/16/name = "RightRingMetacarpal"
-bones/17/name = "RightRingProximal"
-bones/18/name = "RightRingIntermediate"
-bones/19/name = "RightRingDistal"
-bones/20/name = "RightRingTip"
-bones/21/name = "RightLittleMetacarpal"
-bones/22/name = "RightLittleProximal"
-bones/23/name = "RightLittleIntermediate"
-bones/24/name = "RightLittleDistal"
-bones/25/name = "RightLittleTip"
-
-[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XRNode3D2/OpenXRFbHandTrackingMesh"]
-hand_tracker = &"/user/hand_tracker/right"

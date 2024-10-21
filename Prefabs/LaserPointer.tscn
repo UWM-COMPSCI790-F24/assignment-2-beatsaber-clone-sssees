@@ -5,12 +5,12 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_kxp1d"]
 height = 1.0
-radius = 0.025
+radius = 0.03
 
 [node name="LaserPointer" type="Node3D"]
 script = ExtResource("1_s07xt")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+[node name="DisplayMesh" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
 material_override = ExtResource("2_x2s6q")
 radius = 0.01

@@ -1,11 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ugb8orhcsbj4"]
+[gd_scene load_steps=6 format=3 uid="uid://ugb8orhcsbj4"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_a6c52"]
-[ext_resource type="Script" path="res://Scripts/BasicXRSetup.gd" id="1_o00ps"]
-[ext_resource type="Script" path="res://Scripts/SaberController.gd" id="2_cey28"]
-[ext_resource type="PackedScene" uid="uid://bns1wjdfq574m" path="res://Models/Quest2Controllers/oculus_quest2_controller_left.glb" id="2_iijpd"]
 [ext_resource type="Script" path="res://Scripts/CubeSpawner.gd" id="2_noahy"]
-[ext_resource type="PackedScene" uid="uid://cepm4yfiedo0i" path="res://Prefabs/LaserPointer.tscn" id="6_10xxv"]
+[ext_resource type="PackedScene" uid="uid://b2hfsk0u6hvqs" path="res://Prefabs/XRRig.tscn" id="4_igspx"]
 [ext_resource type="PackedScene" uid="uid://c53f5cmu7wsfx" path="res://Prefabs/NoteBox.tscn" id="7_a8m0e"]
 
 [sub_resource type="Environment" id="Environment_jf78m"]
@@ -42,28 +39,4 @@ transform = Transform3D(0.707107, -0.707107, 0, -3.09086e-08, -3.09086e-08, 1, -
 polygon = PackedVector2Array(0, 0, 0, 1, 1.65889, 1.65959, 1, 0)
 depth = 0.05
 
-[node name="XRRig" type="XROrigin3D" parent="."]
-current = true
-script = ExtResource("1_o00ps")
-
-[node name="XRCamera3D" type="XRCamera3D" parent="XRRig"]
-
-[node name="LeftHand" type="XRController3D" parent="XRRig"]
-tracker = &"left_hand"
-script = ExtResource("2_cey28")
-
-[node name="oculus_quest2_controller_left" parent="XRRig/LeftHand" instance=ExtResource("2_iijpd")]
-transform = Transform3D(1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
-
-[node name="LaserPointer" parent="XRRig/LeftHand" instance=ExtResource("6_10xxv")]
-visible = false
-
-[node name="RightHand" type="XRController3D" parent="XRRig"]
-tracker = &"right_hand"
-script = ExtResource("2_cey28")
-
-[node name="oculus_quest2_controller_left2" parent="XRRig/RightHand" instance=ExtResource("2_iijpd")]
-transform = Transform3D(-1, 0, 0, 0, -0.63473, -0.772734, 0, 0.772734, -0.63473, 0, 0.0394877, 0.0108458)
-
-[node name="LaserPointer" parent="XRRig/RightHand" instance=ExtResource("6_10xxv")]
-visible = false
+[node name="XRRig" parent="_Environment" instance=ExtResource("4_igspx")]

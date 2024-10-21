@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfwcnbgiu7ikd"]
+
+[ext_resource type="PackedScene" uid="uid://c53f5cmu7wsfx" path="res://Prefabs/NoteBox.tscn" id="1_nq6pr"]
+
+[node name="Test" type="Node3D"]
+
+[node name="NoteBox" parent="." instance=ExtResource("1_nq6pr")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.86793, 0, 0.496686, -0.163303, 0.944405, 0.285362, -0.469073, -0.328784, 0.819678, 0.757382, 0.43514, 1.2499)

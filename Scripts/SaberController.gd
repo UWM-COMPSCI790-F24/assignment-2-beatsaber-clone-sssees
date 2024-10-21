@@ -1,6 +1,7 @@
 extends XRController3D
 class_name SaberController
 
+@export var saberType: NoteBox.NoteIdent
 @export var laser: LaserPointer
 @export var laserLength: float = 0.5
 var laserVisible: bool = true
@@ -14,6 +15,8 @@ func _ready() -> void:
 	
 	laser.laser_entered_area.connect(_on_laser_entered_area)
 	laser.visible = laserVisible
+	
+	laser.SetColor(NoteBox.NoteIdentColors[saberType])
 
 var buttonPressedLastFrame = false # ew, don't like this...
 func _process(delta: float) -> void:
@@ -25,7 +28,7 @@ func _process(delta: float) -> void:
 		laser.visible = laserVisible
 	buttonPressedLastFrame = is_button_pressed("ax_button")
 
-func _on_laser_entered_area(area: Area3D) -> void:
+func _on_laser_entered_area(area: Area3D, strikeDir: Vector3) -> void:
 	var possibleNode: Node3D = area.get_node(area.get_meta("NoteBox"))
 	
 	if possibleNode is not NoteBox:
@@ -33,6 +36,11 @@ func _on_laser_entered_area(area: Area3D) -> void:
 		
 	var box = possibleNode as NoteBox
 	#print("Note box hit! ", box)
-	box.DoGibs()
+	
+	var matchesType = box.ident == saberType || box.ident == NoteBox.NoteIdent.Netural
+	var matchesDirection = strikeDir.dot(-box.global_transform.basis.y.normalized()) > 0.6
+	
+	if matchesType && matchesDirection:
+		box.DoGibs()
 	
 	
