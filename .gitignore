@@ -4,4 +4,6 @@
 /addons/
 # Intentional ignores
 # Get the OpenXR plugin from the AssetLib if needed
-*.apk
+**/*.apk
+# Blender backups
+**/*.blend?
